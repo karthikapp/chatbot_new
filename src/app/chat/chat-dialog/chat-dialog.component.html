@@ -1,15 +1,86 @@
-<h1> Angular Bot </h1>
+<!--  <div class="container clearfix" style="font-family: 'Barlow Condensed', sans-serif;">
+  	<div class="chat">
+  		<div class="chat-header clearfix">
+  			<div class="chat-about">
+  				<div class="chat-with">Service Bot</div>
+  			</div>
+  		</div> 
 
-<ng-container *ngFor="let message of messages | async">
-	<div class="message" [ngClass]="{'from': message.sentBy === 'bot', 'to': message.sentBy === 'user'}">
-									 {{message.content}}
-	</div>
+  		<div class="chat-history">
+  			<ul style="list-style-type: none !important;" #container>
+  				<li class="clearfix" *ngFor="let message of messages | async">
+  					<div class="message" [ngClass]="{'from': message.sentBy === 'bot', 'to': message.sentBy === 'user'}" [ngStyle]="getalignmentmessage(message.sentBy)">
+  			
+  						<span class="message-data" >{{message.sentBy}}</span> <i class="fa fa-circle me"></i>
+
+            <div class="message-data" [ngStyle]="getalignmenttime(chat.user)">
+              <span class="message-data-time" >{{chat.time| timeAgo}}</span> &nbsp; &nbsp;
+              <span class="message-data-name" >{{chat.user}}</span> <i class="fa fa-circle me"></i>
+            </div>
+  					</div>
+  					<div class="{{retrunstyle(message.sentBy)}}">
+  					
+  						<div>{{message.content}}</div>
+  					</div>
+  				</li>
+  			</ul>
+  		</div> 
+
+  		<div class="chat-message clearfix">
+  			<textarea [(ngModel)]="formValue" (keyup.enter)="sendMessage()" name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3"></textarea>
+
+  			<button type="button" (click) = "sendMessage()">Send</button>
+  		</div> 
+  	</div> 
+  </div> 
 
 
-</ng-container>
 
-<label for="nameField">Your Message </label>
 
-<input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text"> <br>
+ -->
+<!-- 
+			<ng-container *ngFor="let message of messages | async">
+				<div class="message" [ngClass]="{'from': message.sentBy === 'bot', 'to': message.sentBy === 'user'}">
+												 {{message.content}}
+				</div>
 
-<button (click)="sendMessage()">Send</button>
+
+			</ng-container>
+
+			<label for="nameField">Your Message </label>
+
+			<input [(ngModel)]="formValue" (keyup.enter)="sendMessage()" type="text"> <br>
+
+			<button (click)="sendMessage()">Send</button> -->
+
+
+  <div class="container clearfix" style="font-family: 'Barlow Condensed', sans-serif;">
+  	<div class="chat">
+  		<div class="chat-header clearfix">
+  			<img src="https://keyreply.com/assets/images/keyreply-worldclassbot.png" alt="avatar" style="height: 55px; width: 55px;" />
+  			<div class="chat-about">
+  				<div class="chat-with">Chat with Vincent Botman</div>
+  			</div>
+  		</div> 
+  		<div class="chat-history">
+  			<ul style="list-style-type: none !important;" #container>
+  				<li class="clearfix" *ngFor="let chat of chathistory">
+  					<div class="message-data" [ngStyle]="getalignmentmessage(chat.user)">
+            
+  						<span class="message-data-name" >{{chat.user}}</span> <i class="fa fa-circle me"></i>
+                <span class="message-data-time" > <time>{{chat.time | date:'shortTime' }}</time></span> &nbsp; &nbsp;
+  					</div>
+  					<div class="{{retrunstyle(chat.user)}}">
+  						<div>{{chat.message}}</div>
+  					</div>
+  				</li>
+  			</ul>
+  		</div> 
+  		<div class="chat-message clearfix">
+  			<textarea [(ngModel)]="chatmessage" (keyup.enter)="sendmessage(chatmessage)" name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3"></textarea>
+  			<i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+  			<i class="fa fa-file-image-o"></i>
+  			<button type="button" (click) = "sendmessage(chatmessage)">Send</button>
+  		</div> 
+  	</div>  
+  </div> 
