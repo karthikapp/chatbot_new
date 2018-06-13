@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/scan';
 import { ApiAiClient } from 'api-ai-javascript';
 import { environment } from '../../../environments/environment';
+import {FirebaseserviceService} from '../../firebaseservice.service'
+
 
 @Component({
   selector: 'chat-dialog',
@@ -22,7 +24,7 @@ export class ChatDialogComponent implements OnInit {
   readonly client = new ApiAiClient({accessToken: this.token});
 
 
-  constructor(private chat: ChatService) 
+  constructor(private chat: ChatService, private firebase:FirebaseserviceService ) 
 
   {
 
@@ -41,7 +43,9 @@ export class ChatDialogComponent implements OnInit {
     this.timeInMsnow = Date.now();
     var welcomemessage = {'message': "Hello, Good to see you here, How can I help you ?", 'user': "bot", 'time' : this.timeInMsnow}
     console.log(welcomemessage)
+
     this.chathistory.push(welcomemessage)
+    this.firebase.createsession(this.chathistory)
 
   }
 
