@@ -4,11 +4,11 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-
+  production: true,
   dialogflow:{
   	angularBot: 'f45e4f20817d4b61800cad910d1c17e4'
   },
+  
     firebase: {
      apiKey: "AIzaSyDmrikl0a0Rk-dIjQ8qtg3amiguNzw44dA",
     authDomain: "chatbottest-f5200.firebaseapp.com",

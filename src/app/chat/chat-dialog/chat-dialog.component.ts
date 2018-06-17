@@ -45,7 +45,7 @@ export class ChatDialogComponent implements OnInit {
     console.log(welcomemessage)
 
     this.chathistory.push(welcomemessage)
-    this.firebase.createsession(this.chathistory)
+    // this.firebase.createsession(this.chathistory)
 
   }
 
