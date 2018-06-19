@@ -22,6 +22,8 @@ export class ChatDialogComponent implements OnInit {
   public timeInMsnow: any;
   readonly token = environment.dialogflow.angularBot;
   readonly client = new ApiAiClient({accessToken: this.token});
+  public chatcontext : any;
+  public res: any;
 
 
   constructor(private chat: ChatService, private firebase:FirebaseserviceService ) 
@@ -43,8 +45,9 @@ export class ChatDialogComponent implements OnInit {
     this.timeInMsnow = Date.now();
     var welcomemessage = {'message': "Hello, Good to see you here, How can I help you ?", 'user': "bot", 'time' : this.timeInMsnow}
     console.log(welcomemessage)
-
     this.chathistory.push(welcomemessage)
+    this.chatcontext = {'greivance_stated': "", "greivance_type": "", "customer_id": "", "compliant_exists": ""}
+
     // this.firebase.createsession(this.chathistory)
 
   }
@@ -61,9 +64,30 @@ export class ChatDialogComponent implements OnInit {
   	 var messe = this.client.textRequest(message).then(res => {
      this.timeInMsnow = Date.now();
      console.log("res",res)
+     this.res = res;
      const speech = res.result.fulfillment.speech;
+     if (this.res.result.metadata.intentName == "greivanceintent")
+     {
+       const greivance_stated  = "Yes";
+       this.chatcontext.greivance_stated = greivance_stated
+        if (this.res.result.parameters.complaint != "")
+        {
+          this.chatcontext.greivance_type = "compliant"
+        }
+        else if (this.res.result.parameters.grievance != "")
+        {
+          this.chatcontext.greivance_type = "greivance"
+        }
+     }
+     else 
+     {
+       const greivance_stated  = "No"
+     }
+     
      var botmessage = {'message': speech, 'user': "bot", 'time' : this.timeInMsnow}
      this.chathistory.push(botmessage)
+     
+     console.log(this.chatcontext)
      
     })
      

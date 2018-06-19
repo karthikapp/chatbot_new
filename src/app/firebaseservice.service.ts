@@ -26,9 +26,8 @@ export class FirebaseserviceService {
  
 	createsession(chathistory)
 	{
-	  const listRef = this.db.list('sessions');
-	  return listRef.push({ chathistory: chathistory });
-		
+	  const listRef = this.afs.collection('sessions')
+	  return listRef.add({ "chathistory": chathistory, "sessionstarttime" : firebase.firestore.FieldValue.serverTimestamp() });
 	}
 
 }
