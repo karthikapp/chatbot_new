@@ -1,25 +1,125 @@
-<div class="container">
+<div class="container" style="font-family: 'Rajdhani', sans-serif;padding-left: 10px;padding-right: 10px;">
   <br>
   <br>
-  <div class="uk-child-width-expand@s uk-text-center" uk-grid style="padding-left: 10px;padding-right: 10px;">
+  <div class="uk-child-width-expand@s uk-text-center" uk-grid style="padding-left: 0px;padding-right: 10px;">
     <div>
      <div>
-      <div class="uk-card uk-card-primary uk-card-body" style="background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);">
-    
+      <div class="tiles green m-b-10">
+        <div class="tiles-body">
+          <div class="controller">
+            <a href="javascript:;" class="reload"></a>
+            <a href="javascript:;" class="remove"></a>
+          </div>
+          <div class="tiles-title text-black" style="font-family: 'Rajdhani', sans-serif;font-size: 20px;">OVERALL SESSIONS </div>
+          <div class="widget-stats">
+            <br>
+            <div class="wrapper transparent">
+             <span class="item-count animate-number semi-bold" data-value="2415" data-animation-duration="700" style="font-size: 20pt;">{{allsessionslength}}</span>
+           </div>
+         </div>
+         <br>
+         <br>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div>
+
+
+
+  <div class="col-md-4 col-vlg-3 col-sm-6">
+    <div class="tiles purple m-b-10">
+      <div class="tiles-body">
+        <div class="controller">
+          <a href="javascript:;" class="reload"></a>
+          <a href="javascript:;" class="remove"></a>
+        </div>
+        <div class="tiles-title text-black">SERVER LOAD </div>
+        <div class="widget-stats">
+          <div class="wrapper transparent">
+            <span class="item-title">Overall Load</span> <span class="item-count animate-number semi-bold" data-value="5695" data-animation-duration="700">5,695</span>
+          </div>
+        </div>
+        <div class="widget-stats">
+          <div class="wrapper transparent">
+            <span class="item-title">Today's</span> <span class="item-count animate-number semi-bold" data-value="568" data-animation-duration="700">568</span>
+          </div>
+        </div>
+        <div class="widget-stats ">
+          <div class="wrapper last">
+            <span class="item-title">Monthly</span> <span class="item-count animate-number semi-bold" data-value="12459" data-animation-duration="700">12,459</span>
+          </div>
+        </div>
+        <br>
+        <br>
       </div>
     </div>
   </div>
-  <div>
-    <div class="uk-card uk-card-primary uk-card-body" style="background-color: #673AB7;">
-      <h3 class="uk-card-title" style="text-align: left">Primary</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-    </div>
-  </div>
-  <div>
-    <div class="uk-card uk-card-primary uk-card-body" style="background-color: #FFC107;">
-      <h3 class="uk-card-title" style="text-align: left">Primary</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+
+</div>
+<div>
+  <div class="col-md-4 col-vlg-3 col-sm-6">
+    <div class="tiles blue m-b-10">
+      <div class="tiles-body">
+        <div class="controller">
+          <a href="javascript:;" class="reload"></a>
+          <a href="javascript:;" class="remove"></a>
+        </div>
+        <div class="tiles-title text-black">OVERALL VISITS </div>
+        <div class="widget-stats">
+          <div class="wrapper transparent">
+            <span class="item-title">Overall Visits</span> <span class="item-count animate-number semi-bold" data-value="15489" data-="" animation-duration="700">15,489</span>
+          </div>
+        </div>
+        <div class="widget-stats">
+          <div class="wrapper transparent">
+            <span class="item-title">Today's</span> <span class="item-count animate-number semi-bold" data-value="551" data-animation-duration="700">551</span>
+          </div>
+        </div>
+        <div class="widget-stats ">
+          <div class="wrapper last">
+            <span class="item-title">Monthly</span> <span class="item-count animate-number semi-bold" data-value="1450" data-animation-duration="700">1,450</span>
+          </div>
+        </div>
+
+        <br>
+        <br>
+      </div>
     </div>
   </div>
 </div>
+</div>
+
+
+<br>
+
+
+
+<div class="uk-text-center" uk-grid>
+  <div class="uk-width-1-3@m">
+   <h3 class="uk-card-title" style="font-family: 'Rajdhani', sans-serif;">Current Sessions</h3>
+   <table class="ui red table">
+    <thead>
+      <tr><th>Number of Messages</th>
+        <th>Session Start Time</th>
+        <th>Type</th>
+      </tr></thead><tbody>
+        <tr *ngFor="let item of sessions; let i = index" [attr.data-index]="i">
+          <td>{{item.chathistory.length}}</td>
+          <td>{{item.sessionstarttime.seconds* 1000 | date:'shortTime'}}</td>
+          <td>{{item.session_context.greivance_type}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="uk-width-expand@m">
+   
+     <h3 class="uk-card-title" style="font-family: 'Rajdhani', sans-serif;">Session Locations</h3>
+      <div class="uk-card uk-card-default uk-card-body uk-width-2-4@m" style="padding-left: 10px;">
+     <div id="googleMap" style="width:100%;height:380px;"></div>
+   </div>
+ </div>
+</div>
+
 </div>

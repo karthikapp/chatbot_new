@@ -24,6 +24,7 @@ export class ChatDialogComponent implements OnInit {
   readonly client = new ApiAiClient({accessToken: this.token});
   public chatcontext : any;
   public res: any;
+  public documentid : any;
 
 
   constructor(private chat: ChatService, private firebase:FirebaseserviceService ) 
@@ -48,8 +49,12 @@ export class ChatDialogComponent implements OnInit {
     this.chathistory.push(welcomemessage)
     this.chatcontext = {'greivance_stated': "", "greivance_type": "", "customer_id": "", "compliant_exists": ""}
 
-    // this.firebase.createsession(this.chathistory)
-
+    this.firebase.createsession(this.chathistory,this.chatcontext).then(val => 
+      {
+        this.documentid = val.id;
+        console.log(this.documentid)
+        // this.firebase.setcontext(this.chatcontext,this.documentid )
+      });
   }
 
 
@@ -59,8 +64,6 @@ export class ChatDialogComponent implements OnInit {
      this.timeInMsnow = Date.now();
      var usermessage = {'message': message, 'user': "user", 'time' : this.timeInMsnow}
      this.chathistory.push(usermessage)
-
-
   	 var messe = this.client.textRequest(message).then(res => {
      this.timeInMsnow = Date.now();
      console.log("res",res)
@@ -74,9 +77,9 @@ export class ChatDialogComponent implements OnInit {
         {
           this.chatcontext.greivance_type = "compliant"
         }
-        else if (this.res.result.parameters.grievance != "")
+        else if (this.res.result.parameters.netissue != "")
         {
-          this.chatcontext.greivance_type = "greivance"
+          this.chatcontext.greivance_type = "netissue"
         }
      }
      else 
@@ -84,10 +87,12 @@ export class ChatDialogComponent implements OnInit {
        const greivance_stated  = "No"
      }
      
-     var botmessage = {'message': speech, 'user': "bot", 'time' : this.timeInMsnow}
+     var botmessage = {'message': speech, 'user': "bot", 'time' : this.timeInMsnow, 'resolved_intent': this.res.result.metadata.intentName}
      this.chathistory.push(botmessage)
-     
      console.log(this.chatcontext)
+
+     this.firebase.updatechathistory(this.chathistory,this.documentid)
+     this.firebase.updatecontext(this.chatcontext,this.documentid )
      
     })
      

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FirebaseserviceService} from '../firebaseservice.service'
-
+declare const google: any;
 
 @Component({
   selector: 'dash',
@@ -9,13 +9,39 @@ import {FirebaseserviceService} from '../firebaseservice.service'
 })
 export class DashComponent implements OnInit {
 
-  constructor(private firebase:FirebaseserviceService) { }
+	public allsessionslength : any;
+	private sessions : any;
+
+  constructor(private firebase:FirebaseserviceService) 
+  { 
+  
+   }
+
+
 
   ngOnInit() 
   {
   	this.firebase.getchatsessions().subscribe(sessions => {
+  		this.allsessionslength = sessions.length
+  		this.sessions = sessions
   		console.log(sessions)
   	})
+
+
+  	let mapProp = {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 8,
+          
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        let map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        let market = new google.maps.Marker({
+          center: {lat: -34.397, lng: 150.644},
+          position: {lat: -34.397, lng: 150.644},
+          map: map,
+          title: 'Hello World!'
+        });
   }
 
 }
